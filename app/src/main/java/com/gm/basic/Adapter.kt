@@ -14,7 +14,7 @@ import kotlin.properties.Delegates
  * Github     : https://github.com/goutham106
  * Created on : 2020-01-02.
  */
-class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>(), AutoUpdatableAdapter {
+class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>(), AutoUpdater {
 
     var items: List<Data> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
         autoNotify(oldValue, newValue) { o, n -> o.title == n.title }

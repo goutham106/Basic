@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Github     : https://github.com/goutham106
  * Created on : 2020-01-03.
  */
-interface AutoUpdatableAdapter {
+interface AutoUpdater {
     fun <T> RecyclerView.Adapter<*>.autoNotify(
         old: List<T>,
         new: List<T>,
