@@ -1,4 +1,4 @@
-package com.gm.basic
+package com.gm.basic.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,12 +6,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gm.basic.R
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var vieModel: MainViewModel
-    val adapter: Adapter = Adapter()
+    val adapter: Adapter =
+        Adapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         initRecyclerView()
 
-        button_check.setOnClickListener { vieModel.checkWebservice() }
+        button_check.setOnClickListener {
+            vieModel.checkWebservice()
+        }
 
         vieModel.data.observe(this, Observer {
             adapter.items = it

@@ -1,4 +1,4 @@
-package com.gm.basic
+package com.gm.basic.data
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

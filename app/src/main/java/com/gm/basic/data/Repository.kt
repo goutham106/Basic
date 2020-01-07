@@ -1,4 +1,6 @@
-package com.gm.basic
+package com.gm.basic.data
+
+import com.gm.basic.utils.Utils
 
 /**
  * Author     : Gowtham

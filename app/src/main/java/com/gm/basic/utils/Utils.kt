@@ -1,5 +1,6 @@
-package com.gm.basic
+package com.gm.basic.utils
 
+import com.gm.basic.domain.Api
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -16,7 +17,7 @@ object Utils {
     private fun generateRetrofit(): Retrofit {
         return Retrofit.Builder()
             .client(OkHttpClient().newBuilder().build())
-            .baseUrl("https://androidwave.com/api/")
+            .baseUrl("https://testapi.io/api/crosscodedj/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()

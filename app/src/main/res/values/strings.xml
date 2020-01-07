@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Basic</string>
     <string name="check">Check</string>
+    <string name="splash_screen">Splash Screen</string>
 </resources>

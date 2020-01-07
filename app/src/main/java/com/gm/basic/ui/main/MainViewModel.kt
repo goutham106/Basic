@@ -1,9 +1,11 @@
-package com.gm.basic
+package com.gm.basic.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gm.basic.data.Data
+import com.gm.basic.data.Repository
 import kotlinx.coroutines.launch
 
 /**

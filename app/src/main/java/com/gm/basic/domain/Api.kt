@@ -1,6 +1,6 @@
-package com.gm.basic
+package com.gm.basic.domain
 
-import kotlinx.coroutines.Deferred
+import com.gm.basic.data.BaseData
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -12,6 +12,6 @@ import retrofit2.http.GET
  */
 interface Api {
 
-    @GET("feed.json")
+    @GET("home")
     suspend fun getFeeds(): Response<BaseData>
 }
