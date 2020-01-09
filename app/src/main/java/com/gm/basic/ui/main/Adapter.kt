@@ -17,7 +17,7 @@ import kotlin.properties.Delegates
  * Github     : https://github.com/goutham106
  * Created on : 2020-01-02.
  */
-class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>(),
+class Adapter(var listner: OnItemClickListener) : RecyclerView.Adapter<Adapter.ViewHolder>(),
     AutoUpdater {
 
     var items: List<Data> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
@@ -33,20 +33,42 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>(),
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], position)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(data: Data) = with(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView.rootView) {
+        /*fun bind(
+            data: Data,
+            position: Int,
+            listner: OnItemClickListener
+        ) = with(itemView) {
             Glide.with(this.context)
                 .load(data.image_url_tumbnail)
                 .into(img_profile)
 
             text_title.text = data.title
             text_description.text = data.description
-        }
+            this.setOnClickListener { listner.onItemClicked(position, data) }
 
+            img_profile.setOnClickListener { listner.onItemClicked(position, data) }
+        }*/
+
+
+        fun bind(data: Data, position: Int) {
+
+            Glide.with(itemView.context)
+                .load(data.image_url_tumbnail)
+                .into(itemView.img_profile)
+
+            itemView.text_title.text = data.title
+            itemView.text_description.text = data.description
+            itemView.cardView.setOnClickListener { listner.onItemClicked(position, data) }
+
+        }
     }
 
+    interface OnItemClickListener {
+        fun onItemClicked(position: Int, data: Data)
+    }
 
 }

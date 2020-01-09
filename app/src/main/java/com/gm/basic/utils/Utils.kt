@@ -1,5 +1,7 @@
 package com.gm.basic.utils
 
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.gm.basic.domain.Api
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient

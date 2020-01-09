@@ -1,20 +1,20 @@
 package com.gm.basic.ui.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.gm.basic.R
+import com.gm.basic.data.Data
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener {
 
     lateinit var vieModel: MainViewModel
-    val adapter: Adapter =
-        Adapter()
+    private var adapter: Adapter = Adapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +34,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = TopDissolveLayoutManager()//LinearLayoutManager(this)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = adapter
+    }
+
+    override fun onItemClicked(position: Int, data: Data) {
+        Toast.makeText(this, data.title, Toast.LENGTH_SHORT).show()
     }
 }
