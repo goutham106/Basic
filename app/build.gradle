@@ -17,6 +17,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            buildConfigField "String", "base_url", "\"https://www.google.com/\""
+            dimension "default"
+        }
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,6 +37,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -58,6 +69,10 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
 //    implementation 'io.coil-kt:coil:0.9.1'
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
