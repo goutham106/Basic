@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Task
 
 /**
  * Created by Gowtham on 07/03/18.
- * Copyright Indyzen Inc, 2018.
  */
 class LocationHelper(con: Context) {
     private var ctx: Context = con
@@ -85,12 +84,9 @@ class LocationHelper(con: Context) {
 
     fun startRequestLocation() {
         try {
-//
             Log.e("startRequestLocation", "Starting location updates")
             isLocationRunning = true
             mFusedLocationClient?.requestLocationUpdates(mLocationRequest, getPendingIntent())
-//
-
         } catch (e: SecurityException) {
             e.printStackTrace()
         }

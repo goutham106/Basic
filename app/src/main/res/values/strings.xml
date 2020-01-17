@@ -2,4 +2,8 @@
     <string name="app_name">Basic</string>
     <string name="check">Check</string>
     <string name="splash_screen">Splash Screen</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="permissions_denied">Permissions denied.</string>
+    <string name="action_grant">Grant</string>
 </resources>

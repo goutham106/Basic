@@ -3,15 +3,16 @@ package com.gm.basic.location
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.gm.basic.ui.main.MainActivity
+import com.google.android.gms.location.LocationResult
 
 /**
  * Created by Gowtham on 07/03/18.
- * Copyright Indyzen Inc, 2018.
  */
 class LocationUpdatesBroadcastReceiver : BroadcastReceiver() {
 
     companion object {
-        const val ACTION_PROCESS_UPDATES: String = "com.skyhop.driver.location.action.PROCESS_UPDATES"
+        const val ACTION_PROCESS_UPDATES: String = "com.gm.basic.location.action.PROCESS_UPDATES"
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -22,8 +23,7 @@ class LocationUpdatesBroadcastReceiver : BroadcastReceiver() {
                 val location = result.lastLocation
 //                val location = locations.last()
 
-                BaseActivity.locationUpdate(location)
-                BaseFragment.locationUpdate(location)
+                MainActivity.locationUpdate(location)
             }
         }
     }

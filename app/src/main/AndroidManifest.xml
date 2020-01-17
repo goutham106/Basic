@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +23,16 @@
             android:theme="@style/AppTheme.Splash"/>
         <activity android:name=".ui.main.MainActivity" />
 
+        <!--<meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR API KEY"/>-->
+        <receiver
+            android:name=".location.LocationUpdatesBroadcastReceiver"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.gm.basic.location.action.PROCESS_UPDATES" />
+            </intent-filter>
+        </receiver>
         <activity-alias
             android:name=".MainActivity"
             android:targetActivity=".ui.splash.SplashActivity">
