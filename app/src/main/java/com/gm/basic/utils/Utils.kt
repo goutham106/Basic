@@ -1,9 +1,11 @@
 package com.gm.basic.utils
 
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import com.gm.basic.domain.Api
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,9 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object Utils {
 
-    private fun generateRetrofit(): Retrofit {
+    private fun generateRetrofit(context: Context): Retrofit {
         return Retrofit.Builder()
-            .client(OkHttpClient().newBuilder().build())
+            .client(generateOkHttpClient(context))
             .baseUrl("https://testapi.io/api/crosscodedj/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -26,9 +28,43 @@ object Utils {
     }
 
 
-    fun getApiService(): Api {
-        return generateRetrofit().create(Api::class.java)
+    fun getApiService(context: Context): Api {
+        return generateRetrofit(context).create(Api::class.java)
     }
 
+
+    private fun generateOkHttpClient(context: Context): OkHttpClient {
+        val cacheSize = (5 * 1024 * 1024).toLong() // 5MB
+        val myCache = Cache(context.cacheDir, cacheSize)
+
+        return OkHttpClient.Builder()
+            .cache(myCache)
+            .addInterceptor { chain ->
+                var request = chain.request()
+                request = if (hasNetwork(context)!!)
+                    request.newBuilder().header(
+                        "Cache-Control",
+                        "public, max-age=" + 5
+                    ).build()
+                else
+                    request.newBuilder().header(
+                        "Cache-Control",
+                        "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7
+                    ).build()
+                chain.proceed(request)
+            }
+            .build()
+
+    }
+
+    fun hasNetwork(context: Context): Boolean? {
+        var isConnected: Boolean? = false // Initial Value
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        if (activeNetwork != null && activeNetwork.isConnected)
+            isConnected = true
+        return isConnected
+    }
 
 }

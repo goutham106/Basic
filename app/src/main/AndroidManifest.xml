@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -19,13 +18,32 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".ui.splash.SplashActivity"
-            android:theme="@style/AppTheme.Splash"/>
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/AppTheme.Splash" />
         <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.theme.ThemeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!--<meta-data
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--<activity-alias
+            android:name=".MainActivity"
+            android:targetActivity=".ui.theme.ThemeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>-->
+
+        <!--
+<meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR API KEY"/>-->
+            android:value="YOUR API KEY"/>
+        -->
         <receiver
             android:name=".location.LocationUpdatesBroadcastReceiver"
             tools:ignore="ExportedReceiver">
@@ -33,15 +51,6 @@
                 <action android:name="com.gm.basic.location.action.PROCESS_UPDATES" />
             </intent-filter>
         </receiver>
-        <activity-alias
-            android:name=".MainActivity"
-            android:targetActivity=".ui.splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
     </application>
 
 </manifest>

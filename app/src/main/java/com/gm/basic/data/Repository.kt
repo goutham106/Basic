@@ -1,5 +1,6 @@
 package com.gm.basic.data
 
+import android.content.Context
 import com.gm.basic.utils.Utils
 
 /**
@@ -13,9 +14,9 @@ class Repository {
     val moview: ArrayList<Data> = ArrayList()
     val list: MutableList<Data> = mutableListOf()
 
-    suspend fun getFeed(): List<Data> {
+    suspend fun getFeed(context: Context): List<Data> {
 
-        val response = Utils.getApiService().getFeeds()
+        val response = Utils.getApiService(context).getFeeds()
 
         if (response.isSuccessful) {
             val listData = response.body()?.data

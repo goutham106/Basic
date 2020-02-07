@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationI
         initialGPS()
 
         button_check.setOnClickListener {
-            vieModel.checkWebservice()
+            vieModel.checkWebservice(context = this)
         }
 
         vieModel.data.observe(this, Observer {

@@ -1,5 +1,6 @@
 package com.gm.basic.ui.main
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,9 +22,9 @@ class MainViewModel : ViewModel() {
     private var _data: MutableLiveData<List<Data>> = MutableLiveData()
     val data: LiveData<List<Data>> = _data
 
-    fun checkWebservice() {
+    fun checkWebservice(context: Context) {
         viewModelScope.launch {
-            _data.postValue(repo.getFeed())
+            _data.postValue(repo.getFeed(context))
         }
 
     }
