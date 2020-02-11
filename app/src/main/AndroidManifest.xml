@@ -18,27 +18,24 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".ui.biometric.BiometricActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.Splash" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.theme.ThemeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <!--<activity-alias
+
+        <activity-alias
             android:name=".MainActivity"
-            android:targetActivity=".ui.theme.ThemeActivity">
+            android:targetActivity=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity-alias>-->
-
+        </activity-alias>
         <!--
 <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -3,10 +3,12 @@ package com.gm.basic.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.util.Log
 import com.gm.basic.domain.Api
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -39,6 +41,7 @@ object Utils {
 
         return OkHttpClient.Builder()
             .cache(myCache)
+            .addInterceptor(getHttpLoggingInterceptor())
             .addInterceptor { chain ->
                 var request = chain.request()
                 request = if (hasNetwork(context)!!)
@@ -65,6 +68,16 @@ object Utils {
         if (activeNetwork != null && activeNetwork.isConnected)
             isConnected = true
         return isConnected
+    }
+
+    fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Log.e("HttpLoggingInterceptor", message)
+            }
+        }).apply {
+            this.level = HttpLoggingInterceptor.Level.BODY
+        }
     }
 
 }

@@ -6,4 +6,5 @@
     <string name="action_settings">Settings</string>
     <string name="permissions_denied">Permissions denied.</string>
     <string name="action_grant">Grant</string>
+    <string name="authenticate">authenticate</string>
 </resources>

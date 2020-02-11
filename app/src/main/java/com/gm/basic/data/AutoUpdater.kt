@@ -28,6 +28,7 @@ interface AutoUpdater {
             override fun getOldListSize() = old.size
 
             override fun getNewListSize() = new.size
+
         })
 
         diff.dispatchUpdatesTo(this)
