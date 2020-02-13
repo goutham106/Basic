@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dsl.DSLActivity">
+
+
+    <Button
+        android:id="@+id/bt_default_dialog"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="showDefaultAlert"
+        android:text="Android Dialog"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_custom_alert_dialog"
+        app:layout_constraintEnd_toEndOf="@+id/bt_custom_alert_dialog"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/bt_custom_alert_dialog"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_custom_alert_dialog"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_default_dialog"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="showCustomAlert"
+        android:text="Custom Alert Dialog"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_dialog_fragment"
+        app:layout_constraintEnd_toEndOf="@+id/bt_dialog_fragment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/bt_dialog_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/bt_default_dialog" />
+
+    <Button
+        android:id="@+id/bt_dialog_fragment"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_custom_alert_dialog"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="showDialogFragment"
+        android:text="Android Dialog Fragment"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_permission"
+        app:layout_constraintEnd_toEndOf="@+id/bt_permission"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/bt_permission"
+        app:layout_constraintTop_toBottomOf="@+id/bt_custom_alert_dialog" />
+
+    <Button
+        android:id="@+id/bt_bottom_sheet"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_permission"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="showBottomSheetDialog"
+        android:text="Bottom Sheet Dialog"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_permission" />
+
+    <Button
+        android:id="@+id/bt_permission"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_dialog_fragment"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="requestStoragePermission"
+        android:text="Ask Storage Permission"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_bottom_sheet"
+        app:layout_constraintEnd_toEndOf="@+id/bt_bottom_sheet"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/bt_bottom_sheet"
+        app:layout_constraintTop_toBottomOf="@+id/bt_dialog_fragment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
