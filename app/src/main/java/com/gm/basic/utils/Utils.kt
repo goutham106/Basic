@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
 import com.gm.basic.domain.Api
+import com.gm.basic.room.AppDatabase
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -34,6 +35,10 @@ object Utils {
         return generateRetrofit(context).create(Api::class.java)
     }
 
+    fun getDBService(context: Context): AppDatabase {
+        return AppDatabase(context)
+    }
+
 
     private fun generateOkHttpClient(context: Context): OkHttpClient {
         val cacheSize = (5 * 1024 * 1024).toLong() // 5MB
@@ -60,8 +65,8 @@ object Utils {
 
     }
 
-    fun hasNetwork(context: Context): Boolean? {
-        var isConnected: Boolean? = false // Initial Value
+    fun hasNetwork(context: Context): Boolean {
+        var isConnected: Boolean = false // Initial Value
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo

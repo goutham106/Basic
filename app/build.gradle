@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.gm.basic"
-        minSdkVersion 21
+        minSdkVersion 29
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -56,32 +56,61 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
 
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    // Room components
+    implementation 'androidx.room:room-runtime:2.2.4'
+    implementation 'androidx.room:room-ktx:2.2.4'
+    kapt 'androidx.room:room-compiler:2.2.4'
+    androidTestImplementation 'androidx.room:room-testing:2.2.4'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
 //    implementation 'io.coil-kt:coil:0.9.1'
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation 'com.google.maps.android:android-maps-utils:0.6.2'
 
     implementation 'com.github.goutham106:runtimepermission:0.2'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     implementation 'androidx.biometric:biometric:1.0.1'
 
+}
+
+def propFile = new File('demo.properties')
+Properties props = new Properties()
+// Check if the file exists
+if (propFile.canRead()) {
+    //Load the file
+    props.load(new FileInputStream(propFile))
+    // If we found the file lets read in all the keys and values and add those to the buildConfig section of our template.
+    if (props != null) {
+        android.buildTypes.all {
+            buildType ->
+                props.any {
+                    property ->
+                        buildType.buildConfigField "String", property.key, "\"${property.value}\""
+                }
+        }
+    } else {
+        throw new InvalidUserDataException('demo.properties found but some entries are missing')
+    }
+} else {
+    // The properties file was not found
+    throw new MissingResourceException('demo.properties not found')
 }

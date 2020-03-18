@@ -10,4 +10,5 @@
 
     <string name="fragment_dialog_title">This is a fragment Dialog</string>
     <string name="fragment_dialog_description">This is a DSL to create custom Dialogs using Dialog Fragment</string>
+    <string name="face_available">Face Available</string>
 </resources>

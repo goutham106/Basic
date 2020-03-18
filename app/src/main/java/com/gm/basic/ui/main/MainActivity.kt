@@ -9,12 +9,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.gm.basic.BuildConfig
 import com.gm.basic.R
 import com.gm.basic.data.Data
 import com.gm.basic.location.LocationHelper
 import com.gm.basic.location.LocationInterface
+import com.gm.basic.room.DataEntity
 import com.gm.permission.GmPermissionManager
 import com.gm.permission.PermissionListener
 import com.google.android.material.snackbar.Snackbar
@@ -23,10 +25,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationInterface {
 
-    lateinit var vieModel: MainViewModel
+    private val vieModel: MainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
     private var adapter: Adapter = Adapter(this)
 
-    lateinit var locationHelper: LocationHelper
+    private lateinit var locationHelper: LocationHelper
     var permissionManager: GmPermissionManager? = null
     private val snackBarContainer: View
         get() = container//window.decorView
@@ -34,8 +38,6 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationI
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        vieModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         locationHelper = LocationHelper(this)
 
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationI
         recyclerView.adapter = adapter
     }
 
-    override fun onItemClicked(position: Int, data: Data) {
+    override fun onItemClicked(position: Int, data: DataEntity) {
         Toast.makeText(this, data.title, Toast.LENGTH_SHORT).show()
     }
 
@@ -83,10 +85,11 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationI
                 override fun showGrantDialog(grantPermissionTo: String): Boolean {
 
                     Snackbar.make(
-                        snackBarContainer,
-                        permissionManager?.getPermissionMessageDialog(grantPermissionTo).toString(),
-                        Snackbar.LENGTH_LONG
-                    )
+                            snackBarContainer,
+                            permissionManager?.getPermissionMessageDialog(grantPermissionTo)
+                                .toString(),
+                            Snackbar.LENGTH_LONG
+                        )
                         .setAction(getString(R.string.action_grant)) { permissionManager?.requestPermissions() }
                         .show()
                     return super.showGrantDialog(grantPermissionTo)
@@ -97,10 +100,11 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationI
                     deniedPermission: String
                 ): Boolean {
                     Snackbar.make(
-                        snackBarContainer,
-                        permissionManager?.getPermissionMessageDialog(deniedPermission).toString(),
-                        Snackbar.LENGTH_LONG
-                    )
+                            snackBarContainer,
+                            permissionManager?.getPermissionMessageDialog(deniedPermission)
+                                .toString(),
+                            Snackbar.LENGTH_LONG
+                        )
                         .setAction(getString(R.string.action_settings)) {
                             GmPermissionManager.gotoSettings(this@MainActivity, PERMISSION_REQUEST)
                         }
@@ -115,7 +119,11 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, LocationI
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         permissionManager?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }

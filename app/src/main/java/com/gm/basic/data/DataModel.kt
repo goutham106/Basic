@@ -1,5 +1,6 @@
 package com.gm.basic.data
 
+import com.gm.basic.room.DataEntity
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -13,7 +14,7 @@ data class BaseData(
 
     @SerializedName("valid") val valid : Boolean,
     @SerializedName("message") val message : String,
-    @SerializedName("data") val data : List<Data>
+    @SerializedName("data") val data : List<DataEntity>
 )
 
 data class Data(

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gm.basic.R
 import com.gm.basic.data.AutoUpdater
-import com.gm.basic.data.Data
+import com.gm.basic.room.DataEntity
 import kotlinx.android.synthetic.main.item_layout.view.*
 import kotlin.properties.Delegates
 
@@ -20,7 +20,7 @@ import kotlin.properties.Delegates
 class Adapter(var listner: OnItemClickListener) : RecyclerView.Adapter<Adapter.ViewHolder>(),
     AutoUpdater {
 
-    var items: List<Data> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
+    var items: List<DataEntity> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
         autoNotify(oldValue, newValue) { o, n -> o.id == n.id }
     }
 
@@ -54,7 +54,7 @@ class Adapter(var listner: OnItemClickListener) : RecyclerView.Adapter<Adapter.V
         }*/
 
 
-        fun bind(data: Data, position: Int) {
+        fun bind(data: DataEntity, position: Int) {
 
             Glide.with(itemView.context)
                 .load(data.image_url_tumbnail)
@@ -68,7 +68,7 @@ class Adapter(var listner: OnItemClickListener) : RecyclerView.Adapter<Adapter.V
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(position: Int, data: Data)
+        fun onItemClicked(position: Int, data: DataEntity)
     }
 
 }

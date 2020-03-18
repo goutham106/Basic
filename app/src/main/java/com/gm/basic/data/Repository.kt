@@ -1,7 +1,10 @@
 package com.gm.basic.data
 
 import android.content.Context
+import com.gm.basic.room.DataEntity
 import com.gm.basic.utils.Utils
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Author     : Gowtham
@@ -12,17 +15,34 @@ import com.gm.basic.utils.Utils
 class Repository {
 
     val moview: ArrayList<Data> = ArrayList()
-    val list: MutableList<Data> = mutableListOf()
+    val list: MutableList<DataEntity> = mutableListOf()
 
-    suspend fun getFeed(context: Context): List<Data> {
+    suspend fun getFeed(context: Context): List<DataEntity> {
+        val db = Utils.getDBService(context)
+        list.clear()
+        if (Utils.hasNetwork(context)) {
+            val response = Utils.getApiService(context).getFeeds()
 
-        val response = Utils.getApiService(context).getFeeds()
+            if (response.isSuccessful) {
+                val listData = response.body()?.data
+                listData?.let { list.addAll(it) }
 
-        if (response.isSuccessful) {
-            val listData = response.body()?.data
-            listData?.let { list.addAll(it) }
+                if (listData != null) {
+                    for (data in listData) {
+                        GlobalScope.launch {
+                            db.DataDAO().insertAll(data)
+                        }
+                    }
+                }
+
+            }
+        } else {
+            GlobalScope.launch {
+                list.addAll(db.DataDAO().getAll())
+                //Log.e("DB", list.toString())
+            }
         }
-
+        Thread.sleep(1000)
         return list
     }
 

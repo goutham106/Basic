@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gm.basic.data.Data
 import com.gm.basic.data.Repository
+import com.gm.basic.room.DataEntity
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
@@ -19,8 +21,8 @@ class MainViewModel : ViewModel() {
 
     private val repo: Repository by lazy { Repository() }
 
-    private var _data: MutableLiveData<List<Data>> = MutableLiveData()
-    val data: LiveData<List<Data>> = _data
+    private var _data: MutableLiveData<List<DataEntity>> = MutableLiveData()
+    val data: LiveData<List<DataEntity>> = _data
 
     fun checkWebservice(context: Context) {
         viewModelScope.launch {
