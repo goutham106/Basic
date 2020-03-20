@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="white">#ffffff</color>
+    <color name="placeholder_grey">#AAADC4</color>
+    <color name="background">#EFEFEF</color>
+
 </resources>

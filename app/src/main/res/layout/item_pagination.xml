@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/placeholder_grey"
+        app:cardCornerRadius="3dp"
+        app:cardPreventCornerOverlap="false">
+        <ImageView
+            android:id="@+id/img_movie"
+            android:layout_width="72dp"
+            android:layout_height="96dp"
+            tools:background="@tools:sample/avatars"
+            android:contentDescription="@null" />
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="72dp"
+        android:paddingTop="8dp">
+
+
+        <TextView
+            android:id="@+id/txt_movie_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:alpha="0.38"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            tools:text="2009 | EN"/>
+
+        <TextView
+            android:id="@+id/txt_movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="Movie Title" />
+
+        <TextView
+            android:id="@+id/txt_movie_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            tools:text="Nowadays, user engagement is considered one of the most important metrics for the success of your app" />
+    </LinearLayout>
+</FrameLayout>

@@ -90,6 +90,9 @@ dependencies {
 
     implementation 'androidx.biometric:biometric:1.0.1'
 
+    implementation 'androidx.paging:paging-runtime:2.1.2'
+    testImplementation 'androidx.paging:paging-common:2.1.2'
+
 }
 
 def propFile = new File('demo.properties')
